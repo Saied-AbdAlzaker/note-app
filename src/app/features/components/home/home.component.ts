@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CardModule } from 'primeng/card';
 import { NoteService } from '../../../core/services/note.service';
 import { SearchNotePipe } from '../../../core/pipes/search-note.pipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -36,6 +37,7 @@ export class HomeComponent implements OnInit {
   searchText: string = '';
   private _note = inject(NoteService);
   private toastr = inject(ToastrService);
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.getNotes();
@@ -94,5 +96,10 @@ export class HomeComponent implements OnInit {
         this.getNotes();
       },
     });
+  }
+
+  logout(){
+    localStorage.clear();
+    this.router.navigate(['/signin']);
   }
 }

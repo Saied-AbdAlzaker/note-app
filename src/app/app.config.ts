@@ -14,7 +14,7 @@ import { globalInterceptor } from './core/interceptors/global.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes,withHashLocation()),
+    provideRouter(routes,),
     provideHttpClient(withFetch(),withInterceptors([globalInterceptor])),
     importProvidersFrom(BrowserAnimationsModule),
     provideAnimationsAsync(),

@@ -8,8 +8,8 @@ export const routes: Routes = [
   { path: '', redirectTo: 'signin', pathMatch: 'full' },
 
   {
-    path: '',
-    component: AuthComponent, canActivate:[userGuard],
+    path: '',canActivate:[userGuard],
+    component: AuthComponent, 
     children: [
       {
         path: 'signin',
