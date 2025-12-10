@@ -1,0 +1,121 @@
+<section class="container">
+  <!-- add -->
+  <div class="text-center my-3">
+    <button (click)="showDialog()" class="btn btn-outline-success">
+      <i class="fa-solid fa-plus"></i>
+      Add Note
+    </button>
+  </div>
+  <!-- search -->
+  <div class="searchNote">
+    <input
+      type="search"
+      class="form-control my-2 w-50 mx-auto"
+      [(ngModel)]="searchText"
+    />
+  </div>
+  <p-dialog
+    header="Add New Note"
+    [modal]="true"
+    [(visible)]="visible"
+    [style]="{ width: '25rem' }"
+  >
+    <form [formGroup]="addNoteForm" (ngSubmit)="addNewNote()">
+      <div class="mb-4">
+        <label for="title" class="font-semibold">Title</label>
+        <input
+          pInputText
+          id="title"
+          class="d-block w-100"
+          formControlName="title"
+          autocomplete="off"
+        />
+        <span class="text-danger">Title is required</span>
+      </div>
+      <div class="mb-4">
+        <label for="content" class="font-semibold">Content</label>
+        <input
+          pInputText
+          id="content"
+          class="d-block w-100"
+          formControlName="content"
+          autocomplete="off"
+        />
+        <span class="text-danger">Title is required</span>
+      </div>
+      <div class="d-flex justify-content-end mt-4 gap-3">
+        <p-button
+          label="Cancel"
+          severity="secondary"
+          (click)="visible = false"
+        />
+        <p-button type="submit" label="Add" />
+      </div>
+    </form>
+  </p-dialog>
+  <!-- get all -->
+  <div class="row">
+    @for (note of userNotes | searchNote:searchText; track note._id) {
+    <div class="col-md-3">
+      <div class="bg-warning-subtle shadow rounded-3 mt-3 p-3">
+        <div class="text-break">
+          <h4>
+            {{ note.title }}
+          </h4>
+          <p class="text-secondary fw-semibold">
+            {{ note.content }}
+          </p>
+        </div>
+        <div class="d-flex justify-content-end gap-2">
+          <button (click)="getNoteById(note)" class="btn btn-outline-warning">
+            <i class="fa-regular fa-pen-to-square"></i>
+          </button>
+          <button (click)="deleteNote(note._id)" class="btn btn-outline-danger">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  <!-- update -->
+  <p-dialog
+    header="Update Note"
+    [modal]="true"
+    [(visible)]="visible1"
+    [style]="{ width: '25rem' }"
+  >
+    <form [formGroup]="updateNoteForm" (ngSubmit)="updateNote()">
+      <div class="mb-4">
+        <label for="title" class="font-semibold">Title</label>
+        <input
+          pInputText
+          id="title"
+          class="d-block w-100"
+          formControlName="title"
+          autocomplete="off"
+        />
+        <span class="text-danger">Title is required</span>
+      </div>
+      <div class="mb-4">
+        <label for="content" class="font-semibold">Content</label>
+        <input
+          pInputText
+          id="content"
+          class="d-block w-100"
+          formControlName="content"
+          autocomplete="off"
+        />
+        <span class="text-danger">Title is required</span>
+      </div>
+      <div class="d-flex justify-content-end mt-4 gap-3">
+        <p-button
+          label="Cancel"
+          severity="secondary"
+          (click)="visible1 = false"
+        />
+        <p-button type="submit" label="Update" severity="warn" />
+      </div>
+    </form>
+  </p-dialog>
+</section>
