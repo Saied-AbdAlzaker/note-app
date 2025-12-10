@@ -36,7 +36,10 @@
           formControlName="title"
           autocomplete="off"
         />
+        @if (addNoteForm.controls['title'].errors &&
+        addNoteForm.controls['title'].touched) {
         <span class="text-danger">Title is required</span>
+        }
       </div>
       <div class="mb-4">
         <label for="content" class="font-semibold">Content</label>
@@ -47,7 +50,10 @@
           formControlName="content"
           autocomplete="off"
         />
-        <span class="text-danger">Title is required</span>
+        @if (addNoteForm.controls['content'].errors &&
+        addNoteForm.controls['content'].touched) {
+        <span class="text-danger">Content is required</span>
+        }
       </div>
       <div class="d-flex justify-content-end mt-4 gap-3">
         <p-button
@@ -55,7 +61,11 @@
           severity="secondary"
           (click)="visible = false"
         />
-        <p-button type="submit" label="Add" />
+        <p-button
+          type="submit"
+          label="Add"
+          [disabled]="addNoteForm.invalid"
+        />
       </div>
     </form>
   </p-dialog>
@@ -101,7 +111,10 @@
           formControlName="title"
           autocomplete="off"
         />
+        @if (updateNoteForm.controls['title'].errors &&
+        updateNoteForm.controls['title'].touched) {
         <span class="text-danger">Title is required</span>
+        }
       </div>
       <div class="mb-4">
         <label for="content" class="font-semibold">Content</label>
@@ -112,7 +125,10 @@
           formControlName="content"
           autocomplete="off"
         />
-        <span class="text-danger">Title is required</span>
+        @if (updateNoteForm.controls['content'].errors &&
+        updateNoteForm.controls['content'].touched) {
+        <span class="text-danger">Content is required</span>
+        }
       </div>
       <div class="d-flex justify-content-end mt-4 gap-3">
         <p-button
@@ -120,7 +136,12 @@
           severity="secondary"
           (click)="visible1 = false"
         />
-        <p-button type="submit" label="Update" severity="warn" />
+        <p-button
+          type="submit"
+          label="Update"
+          severity="warn"
+          [disabled]="updateNoteForm.invalid"
+        />
       </div>
     </form>
   </p-dialog>
